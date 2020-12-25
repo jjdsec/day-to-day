@@ -43,17 +43,17 @@ if (!empty($_POST["password2"])) {
 
 // insert new user in database
 require("pdo.php");
-$stmS = $db->prepare("SELECT count(username) FROM users WHERE username = ?");
+$stmS = $db->prepare("SELECT count(username) FROM users WHERE username = ? OR email = ?;");
 try {
-    $stmS->execute(array($username));
+    $stmS->execute(array($username, $email));
     $result = $stmS->fetch(PDO::FETCH_NUM);
     if (isset($result[0])) {
         if ($result[0] > 0) {
-            display_error("This username is already in use, please try again");
+            display_error("This username or email is already in use, please try again");
         }
     }
 } catch (PDOException $e) {
-    error_log("Unable to query existance of username $uesrname: " . $e->getMessage(), 1, "logs@jimmybear217.com");
+    error_log("Unable to query existance of username $username: " . $e->getMessage(), 1, "logs@jimmybear217.com");
 }
 $stmI = $db->prepare("INSERT INTO users(`username`, `email`, `password`, `status`, `created`) VALUES (:username, :email, :password, :status, :timestamp);");
 try {
@@ -69,7 +69,7 @@ try {
     display_error("Something went wrong while creating your account. Please try again. (" . $e->getMessage() . ")");
 }
 if ($status == 0) {
-    error_log("Unable to add user $username to DB: " . json_encode($stm->errorinfo()), 1, "logs@jimmybear217.com");
+    error_log("Unable to add user $username to DB: " . json_encode($stmI->errorinfo()), 1, "logs@jimmybear217.com");
     display_error("Something went wrong while creating your account. Please try again.");
 }
 

@@ -73,7 +73,7 @@
 
 ?>
     <h1>Welcome to Day to Day</h1>
-    <p>Your account is now valid, you can go ahead and log in to enjoy this app<p>
+    <p>Your account is now activated, you can go ahead and log in to enjoy this app<p>
     <a href="/auth/login.html#u:<?php echo $username; ?>">Sign in</a>
 </body>
 </html>

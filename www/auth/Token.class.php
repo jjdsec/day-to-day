@@ -83,7 +83,7 @@ class Token {
         }
         $stm = $this->token_db->prepare("SELECT * FROM tokens WHERE token = ?");
         try {
-            $stm->execute($token);
+            $stm->execute(array($token));
             $details = $stm->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             $this->is_valid = false;
@@ -199,7 +199,7 @@ class Token {
         }
         $stm = $this->token_db->prepare("DELETE FROM tokens WHERE token = ?");
         try {
-            $stm->execute($this->token);
+            $stm->execute(array($this->token));
             $this->is_valid = false;
         } catch (PDOException $e) {
             error_log("Unable to delete token $this->token: " . $e->getMessage());

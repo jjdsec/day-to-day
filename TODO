@@ -1,0 +1,51 @@
+# Day to Day Project
+
+## Step 2 - authentification
+[_] make a basic login form
+[_] make a basic registration form
+[_] setup users in DB
+```
+    users (
+        username
+        email
+        password (blowfish)
+        status enum('new', 'active', 'disabled')
+        creation_date
+    )
+```
+[_] submit registration and add to DB as new
+[_] generate token and store it
+```
+    tokens (
+        token
+        username
+        access
+        expire
+    )
+```
+[_] send token via an activation email
+[_] receive get request and verify token
+[_] activate user when verified
+[_] redirect to login form if not logged in
+[_] submit login and verify information
+[_] if correct, generate token
+[_] store token as cookie, expiring in 24 hours
+    store as: `base64({username}:{token})` // it's literally basic but provides simple obfuscation
+[_] verify login using token and username
+[_] renew token, expiring old one
+[_] admin interface managing tokens and users
+    [_] admin login table
+    [_] simple admin interface
+    [_] admin checklogin
+[_] logout feature
+    [_] only logout this session (expires only this token)
+    [_] log out from every session (expires evey token of user)
+
+## Step 1 - first draft
+[_] setup a first homepage for the first feature
+[_] setup the basics of the PWA framework
+
+## Step 0 - setup
+[X] setup github
+[X] setup server
+[X] setup coding environemt

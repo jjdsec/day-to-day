@@ -14,11 +14,11 @@
     )
 ```
 [X] submit registration and add to DB as new
-[_] generate token and store it
+[X] generate token and store it
     [X] create class
-    [_] create generator function
-    [_] create DB table
-    [_] upload token to table
+    [X] create generator function
+    [X] create DB table
+    [X] upload token to table
 ```
     tokens (
         token
@@ -27,10 +27,10 @@
         expire
     )
 ```
-[_] send token via an activation email
-[_] receive get request and verify token
-[_] activate user when verified
-[_] redirect to login form if not logged in
+[X] send token via an activation email
+[X] receive get request and verify token
+[X] activate user when verified
+[-] redirect to login form if not logged in
 [_] submit login and verify information
 [_] if correct, generate token
 [_] store token as cookie, expiring in 24 hours

@@ -59,6 +59,10 @@ class Token {
         }
     }
 
+    function __destruct() {
+        $this->token_db = null;
+    }
+
     // connect to DB
     private function db_connect() {
         try {
@@ -75,7 +79,7 @@ class Token {
     private function load_token($token) {
         // query token from DB
         if ($this->token_db == null) {
-            db_connect();
+            $this->db_connect();
         }
         $stm = $this->token_db->prepare("SELECT * FROM tokens WHERE token = ?");
         try {
@@ -138,17 +142,60 @@ class Token {
 
     // create a new token
     private function generate_token() {
+        // connect to DB
+        if ($this->token_db == null) {
+            $this->db_connect();
+        }
+        $stmS = $this->token_db->prepare("SELECT count(token) FROM tokens WHERE token = ?");
+        $stmI = $this->token_db->prepare("INSERT INTO tokens(token, username, access, expiration) VALUES(?, ?, ?, ?);");
         // do while loop
-        // generate random token
-        // verify if exists, if so loop again
+        $validNewToken = false;
+        $readFail=0;
+        try {
+            do {
+            // generate random token
+            $token = bin2hex( random_bytes(32) ); 
+
+            // verify if exists, if so loop again
+                $stmS->execute(array($token));
+                $result = $stmS->fetch(PDO::FETCH_NUM);
+                if (isset($result[0])) {
+                    if ($result[0] == 0 || $readFail>=5) {
+                        $validNewToken = true;
+                    }
+                } else {
+                    error_log("unable to lookup existing tokens for generation");
+                    $readFail++;
+                }
+            } while (!$validNewToken);
+        } catch (PDOException $e) {
+            error_log("unable to verify existance of token: " . $e->getMessage());
+        }
         // insert token with "none" access
+        $expiration = intval(time()+(60*60*24));
+        try {
+            $result = $stmI->execute(array(
+                $token,
+                $this->username,
+                'none',
+                $expiration
+            ));
+        } catch (PDOException $e) {
+            error_log("unable to insert token into DB: " . $e->getMessage());
+            die("Unable to generate token.");
+        }
         // on success store token in $this->token
+        if ($result) {
+            $this->token = $token;
+            $this->access = 'none';
+            $this->expiration = $expiration;
+        }
     }
 
     // use and expire an existing token
     public function consume() {
         if ($this->token_db == null) {
-            db_connect();
+            $this->db_connect();
         }
         $stm = $this->token_db->prepare("DELETE FROM tokens WHERE token = ?");
         try {
@@ -160,27 +207,37 @@ class Token {
     }
 
     // setters
-    public function set_access($access) {
+    public function setAccess($access) {
+        if (!in_array($access, $this->valid_access) || !$this->is_token_new) {
+            return false;
+        }
         if ($this->token_db == null) {
-            db_connect();
+            $this->db_connect();
         }
         $stm = $this->token_db->prepare("UPDATE tokens SET access = ? WHERE token = ?");
         try {
-            $stm->execute($access, $this->token);
-            $this->is_valid = false;
+            if($stm->execute(array($access, $this->token))) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (PDOException $e) {
             error_log("Unable to update token $this->token: " . $e->getMessage());
+            return false;
         }
     }
 
     // getters
-    public function get_access() {
+    public function getAccess() {
         return $this->access;
     }
-    public function get_expiration() {
+    public function getExpiration() {
         return $this->expiration;
     }
-    public function is_valid() {
+    public function isValid() {
         return $this->is_valid;
+    }
+    public function getToken() {
+        return $this->token;
     }
 }

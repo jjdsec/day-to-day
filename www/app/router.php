@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1>router.php</h1>
-    <a href="app.html">App</a>
-    <a href="../auth/login.html">Login</a>
+    <a href="/app/app.html">App</a>
+    <a href="/auth/login.html">Login</a>
 </body>
 </html>

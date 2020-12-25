@@ -1,9 +1,9 @@
 # Day to Day Project
 
 ## Step 2 - authentification
-[_] make a basic login form
-[_] make a basic registration form
-[_] setup users in DB
+[X] make a basic login form
+[X] make a basic registration form
+[X] setup users in DB
 ```
     users (
         username
@@ -13,8 +13,12 @@
         creation_date
     )
 ```
-[_] submit registration and add to DB as new
+[X] submit registration and add to DB as new
 [_] generate token and store it
+    [X] create class
+    [_] create generator function
+    [_] create DB table
+    [_] upload token to table
 ```
     tokens (
         token

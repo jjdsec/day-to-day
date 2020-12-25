@@ -8,7 +8,7 @@
 <body class="form">
     <h1>Login</h1>
     <p class="subtitle">Welcome to Day-to-Day, Let's start by creating your account</p>
-    <form action="login_submit.php" method="POST">
+    <form action="register_submit.php" method="POST">
         <fieldset class="input input-text">
             <legend>Your name</legend>
             <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
@@ -21,7 +21,7 @@
         <p class="input-message" id="input-message-username">This username is {available|taken} /** @todo verify username availability with server */</p>
         <fieldset class="input input-email">
             <legend>Email</legend>
-            <input type="email" name="email" placeholder="Email" autocomplete="${4:autofill (on|off|value)" required>
+            <input type="email" name="email" placeholder="Email" autocomplete="email" required>
         </fieldset>
         <p class="input-message" id="input-message-email">Please enter a correct email address /** @todo use native validation and show error here */</p>
         <fieldset class="input input-password">

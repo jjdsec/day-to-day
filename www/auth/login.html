@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day-to-Day - Sign in</title>
+</head>
+<body class="form">
+    <h1>Login</h1>
+    <p class="subtitle">Welcome to Day-to-Day, please sign in to continue</p>
+    <form action="login_submit.php" method="POST">
+        <fieldset class="input input-text">
+            <legend>Username</legend>
+            <input type="text" name="asername" placeholder="Username" autocomplete="username" required>
+        </fieldset>
+        <fieldset class="input input-password">
+            <legend>Password</legend>
+            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+        </fieldset>
+        <input type="submit" name="submit" value="Sign in">
+    </form>
+    <a href="register.html">Create an Account</a>
+</body>
+</html>

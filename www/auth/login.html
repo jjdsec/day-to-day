@@ -11,7 +11,7 @@
     <form action="login_submit.php" method="POST">
         <fieldset class="input input-text">
             <legend>Username</legend>
-            <input type="text" name="asername" placeholder="Username" autocomplete="username" required>
+            <input type="text" name="username" id="input-username" placeholder="Username" autocomplete="username" required>
         </fieldset>
         <fieldset class="input input-password">
             <legend>Password</legend>
@@ -21,4 +21,42 @@
     </form>
     <a href="register.html">Create an Account</a>
 </body>
+<script type="text/javascript">
+
+let state = {};
+function loadState () {
+    var hashSearch = [];
+    if (document.location.href.indexOf("#") >= 0) {
+        hashSearch = document.location.href.split("#")[1];
+        if (hashSearch.length > 0) {
+            hashSearch = hashSearch.split(";");
+            hashSearch.map( (pair) => {
+                if (pair.indexOf(":") >= 0) {
+                    pair = pair.split(":");
+                } else {
+                    pair = [pair, ""];
+                }
+                switch (pair[0]) {
+                    case "u":
+                        state.username = pair[1];
+                        break;
+                    
+                    default:
+                        console.log('unknown argument key:', pair[0], "with value", pair[1] )
+                        break;
+                }
+                history.replaceState(state, document.title, document.location.href.split("#")[0]);
+            });
+        }
+    } else {
+        if (history.state) {
+            state = history.state;
+        }
+    }
+
+    if (state.username) document.getElementById("input-username").value = state.username;
+        
+};
+loadState();
+</script>
 </html>

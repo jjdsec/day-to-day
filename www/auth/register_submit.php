@@ -77,7 +77,7 @@ require_once("Token.class.php");
 $t = new Token($username);
 if ($t->setAccess("verify_email")) {
     $t = $t->getToken();
-    mail($email, "Welcome to Day-to-Day, $name",  "Welcome to Day-to-Day, \r\n\r\nplease use the following link to activate your account:\r\n" . ((empty($_SERVER["HTTPS"])) ? "http://" : "https://") . $_SERVER["SERVER_NAME"] . "/auth/verify_email.php?token=$t&username=$username\r\n\r\nThank you\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
+    mail($email, "Welcome to Day-to-Day, $name",  "Welcome to Day-to-Day, \r\n\r\nplease use the following link to activate your account:\r\n" . ((empty($_SERVER["HTTPS"])) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . "/auth/verify_email.php?token=$t&username=$username\r\n\r\nThank you\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
 } else {
     error_log("unable configure token properly");
 }

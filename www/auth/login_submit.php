@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day-to-Day - login</title>
-</head>
-<body>
 <?php
 
 
@@ -19,7 +11,18 @@
      */
 
     function display_error($message) {
-        die("<h1>Error</h1><p>$message</p><a href='javascript:history.go(-1)'>Back</a></body></html>");
+        finalOutput("<h1>Error</h1><p>$message</p><a href='javascript:history.go(-1)'>Back</a>");
+    }
+    function finalOutput($message) {
+        echo '<!DOCTYPE html>' .
+        '<html lang="en">' .
+        '<head>' .
+            '<meta charset="UTF-8">' .
+            '<meta name="viewport" content="width=device-width, initial-scale=1.0">' .
+            '<title>Day-to-Day - login</title>' .
+        '</head>' .
+        '<body>' . $message . '</body></html>';
+        exit(0);
     }
 
     require_once("Token.class.php");
@@ -54,11 +57,11 @@
             // all good: generate token
             if ($t->setAccess("app_access")) {
                 $t = $t->getToken();
-                mail($email, "Login Notification",  "Somebody logged into your account with your password. \r\nIf that wasn't you, consider changing your password here: https://" . $_SERVER["SERVER_NAME"] . "/auth/recoverPassword.html\r\n\r\nThank you for using our services.\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
-                $_COOKIE["token"] = base64_encode($username . ":" . $t);
-                $_COOKIE["username"] = $username;
+                mail($email, "Login Notification",  "Somebody logged into your account with your password. \r\nIf that wasn't you, consider changing your password here: https://" . $_SERVER["HTTP_HOST"] . "/auth/recoverPassword.html\r\n\r\nThank you for using our services.\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
+                setcookie("token", base64_encode($username . ":" . $t), time()+(60*60*24), "/", $_SERVER["HTTP_HOST"], true, false);
+                setcookie("username", $username, time()+(60*60*24), "/", $_SERVER["HTTP_HOST"], true, false);
                 header("Location: /app", true, 307);
-                echo "You are successfully logged in, redirecting you to <a href='/app'>the app</a>";
+                finalOutput("You are successfully logged in, redirecting you to <a href='/app'>the app</a>");
             } else {
                 display_error("Something went wrong while logging you in. Our people are working on it. Please try again later.");
             }
@@ -68,8 +71,8 @@
             // send activation email: generate email with token
             if ($t->setAccess("verify_email")) {
                 $t = $t->getToken();
-                mail($email, "Welcome to Day-to-Day",  "Welcome to Day-to-Day, \r\n\r\nplease use the following link to activate your account:\r\n" . ((empty($_SERVER["HTTPS"])) ? "http://" : "https://") . $_SERVER["SERVER_NAME"] . "/auth/verify_email.php?token=$t&username=$username\r\n\r\nThank you\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
-                echo "Please check your email to activate your account";
+                mail($email, "Welcome to Day-to-Day",  "Welcome to Day-to-Day, \r\n\r\nplease use the following link to activate your account:\r\n" . ((empty($_SERVER["HTTPS"])) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . "/auth/verify_email.php?token=$t&username=$username\r\n\r\nThank you\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
+                finalOutput("Please check your email to activate your account");
             } else {
                 display_error("Something went wrong while logging you in. Our people are working on it. Please try again later.");
             }
@@ -79,8 +82,8 @@
             // send ask to reactivate account: generate email with token
             if ($t->setAccess("account_reactivation")) {
                 $t = $t->getToken();
-                mail($email, "Welcome back to Day-to-Day",  "Welcome back to Day-to-Day, \r\n\r\nplease use the following link to restiore your account:\r\n" . ((empty($_SERVER["HTTPS"])) ? "http://" : "https://") . $_SERVER["SERVER_NAME"] . "/auth/restoreAccount.php?token=$t&username=$username\r\n\r\nThank you\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
-                echo "Please check your email to restore your account";
+                mail($email, "Welcome back to Day-to-Day",  "Welcome back to Day-to-Day, \r\n\r\nplease use the following link to restiore your account:\r\n" . ((empty($_SERVER["HTTPS"])) ? "http://" : "https://") . $_SERVER["HTTP_HOST"] . "/auth/restoreAccount.php?token=$t&username=$username\r\n\r\nThank you\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
+                finalOutput("Please check your email to restore your account");
             } else {
                 display_error("Something went wrong while logging you in. Our people are working on it. Please try again later.");
             }
@@ -92,7 +95,4 @@
             break;
     }
 
-
-?>    
-</body>
-</html>
+?>

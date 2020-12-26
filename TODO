@@ -1,5 +1,9 @@
 # Day to Day Project
 
+### account management
+[_] auth/restoreAccount.php
+[_] auto/recoverPassword.php
+
 ## Step 2 - authentification
 [X] make a basic login form
 [X] make a basic registration form
@@ -31,9 +35,9 @@
 [X] receive get request and verify token
 [X] activate user when verified
 [-] redirect to login form if not logged in
-[_] submit login and verify information
-[_] if correct, generate token
-[_] store token as cookie, expiring in 24 hours
+[X] submit login and verify information
+[X] if correct, generate token
+[X] store token as cookie, expiring in 24 hours
     store as: `base64({username}:{token})` // it's literally basic but provides simple obfuscation
 [_] verify login using token and username
 [_] renew token, expiring old one

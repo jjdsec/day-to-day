@@ -35,7 +35,8 @@ class Token {
         "recover_password",
         "app_access",
         "none",
-        "verify_email"
+        "verify_email",
+        "account_reactivation"
     );
     private $token = '';
     private $access = "none";

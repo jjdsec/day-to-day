@@ -19,7 +19,7 @@
      */
 
     function display_error($message) {
-        die("<h1>Error</h1><p>$message</p>");
+        die("<h1>Error</h1><p>$message</p></body></html>");
     }
 
     require_once("Token.class.php");

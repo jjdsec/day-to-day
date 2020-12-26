@@ -39,9 +39,9 @@
 [X] if correct, generate token
 [X] store token as cookie, expiring in 24 hours
     store as: `base64({username}:{token})` // it's literally basic but provides simple obfuscation
-[_] verify login using token and username
+[X] verify login using token and username
 [_] renew token, expiring old one
-[_] admin interface managing tokens and users
+[-] admin interface managing tokens and users
     [_] admin login table
     [_] simple admin interface
     [_] admin checklogin
@@ -50,7 +50,7 @@
     [_] log out from every session (expires evey token of user)
 
 ## Step 1 - first draft
-[_] setup a first homepage for the first feature
+[X] setup a first homepage for the first feature
 [_] setup the basics of the PWA framework
 
 ## Step 0 - setup

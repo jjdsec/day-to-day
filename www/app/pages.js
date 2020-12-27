@@ -11,6 +11,8 @@ function changePage(pageName) {
                 page.classList.remove("currentPage");
         }
     });
-    if (!foundPage && pageName != "tasks") 
-        changePage("tasks");   
+    if (!foundPage && pageName != "Tasks") 
+        return changePage("Tasks");
+
+    return foundPage;
 }

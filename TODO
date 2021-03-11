@@ -1,5 +1,19 @@
 # Day to Day Project
 
+
+## Step 3 - Content
+[-] Establish weekly goal page as homepage
+    [_] create placeholders
+    [_] create table
+    [_] create form to edit table
+[_] Add daily checking page
+    [_] submit
+    [_] query
+[_] Add stat from daily check-ins on weekly goal page
+    [_] query and compile into table
+    [_] change table to a chart-like view
+
+
 ### account management
 [_] auth/restoreAccount.php
 [_] auto/recoverPassword.php
@@ -40,7 +54,7 @@
 [X] store token as cookie, expiring in 24 hours
     store as: `base64({username}:{token})` // it's literally basic but provides simple obfuscation
 [X] verify login using token and username
-[_] renew token, expiring old one
+[x] renew token, expiring old one
 [-] admin interface managing tokens and users
     [_] admin login table
     [_] simple admin interface

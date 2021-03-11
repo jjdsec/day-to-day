@@ -1,7 +1,7 @@
 <?php
 
 // force https
-echo "HTTPS: " . ((!empty($_SERVER["HTTPS"])) ? "True" : "False") . "\n";
+// echo "HTTPS: " . ((!empty($_SERVER["HTTPS"])) ? "True" : "False") . "\n";
 if (empty($_SERVER["HTTPS"])) {
     $url = "https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
     header("Location: " . $url . "\n", true, 302);

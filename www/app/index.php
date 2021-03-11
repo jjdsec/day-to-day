@@ -21,7 +21,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/app.webmanifest">
-    <title>router.php</title>
+    <link rel="stylesheet" type="text/css" href="/css/app-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/app-menus.css">
+    <title>Day to Day</title>
 </head>
 <body>
     <header>
@@ -33,26 +35,26 @@
         <a href="/auth/">Login</a>
         <a href="/app/#settings">Settings</a>
     </nav>
-    <div id="page-view">
-        
-    </div>
-    <footer id="buttom-tabs">
-        <a href="javascript:changePage('Tasks');"><img src="/app/assets/img/tasks.png" alt="tasks"></a>
-        <a href="javascript:changePage('Requests');"><img src="/app/assets/img/requests.png" alt="requests"></a>
-        <a href="javascript:changePage('Notes');"><img src="/app/assets/img/notes.png" alt="notes"></a>
-        <a href="javascript:changePage('Affirmations');"><img src="/app/assets/img/affirmations.png" alt="affirmations"></a>
+    <div id="page-view"></div>
+    <footer id="bottom-tabs">
+        <!-- <img onClick="changePage('Weekly');" src="/app/assets/img/goal.png" alt="Weekly Goal">
+        <img onClick="changePage('Tasks');" src="/app/assets/img/tasks.png" alt="tasks">
+        <img onClick="changePage('Requests');" src="/app/assets/img/requests.png" alt="requests">
+        <img onClick="changePage('Notes');" src="/app/assets/img/notes.png" alt="notes">
+        <img onClick="changePage('Affirmations');" src="/app/assets/img/affirmations.png" alt="affirmations"> -->
     </footer>   
     <!-- global scripts -->
     <script src="pages.js"></script>
     <script src="serviceWorkerMgr.js"></script>
 
     <!-- page scripts  -->
+    <script src="weekly.page.js"></script>
     <script src="tasks.page.js"></script>
-    <script src="affirmations.pages.js"></script>
+    <script src="affirmations.page.js"></script>
 
     <!-- startup command and scripts -->
     <script type="text/javascript">
-        changePage('Tasks');
+        changePage('Weekly');
     </script>
     </body>
 </html>

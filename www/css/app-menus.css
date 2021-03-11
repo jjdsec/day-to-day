@@ -1,0 +1,6 @@
+@charset "UTF-8";
+#bottom-tabs img {
+    display: inline-block;
+    padding: .5% 1%;
+    text-decoration: underline currentColor;
+}

@@ -241,4 +241,12 @@ class Token {
     public function getToken() {
         return $this->token;
     }
+    public function getTimeTilExpire() {
+        $expire = $this->expiration;
+        $time = intval(time());
+        if ($time < $expire)
+            return ($expire - $time);
+        else
+            return 0;
+    }
 }

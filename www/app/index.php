@@ -41,18 +41,18 @@
         <a href="javascript:changePage('Requests');"><img src="/app/assets/img/requests.png" alt="requests"></a>
         <a href="javascript:changePage('Notes');"><img src="/app/assets/img/notes.png" alt="notes"></a>
         <a href="javascript:changePage('Affirmations');"><img src="/app/assets/img/affirmations.png" alt="affirmations"></a>
-    </footer>
-</body>
-<!-- global scripts -->
-<script src="pages.js"></script>
-<script src="serviceWorkerMgr.js"></script>
+    </footer>   
+    <!-- global scripts -->
+    <script src="pages.js"></script>
+    <script src="serviceWorkerMgr.js"></script>
 
-<!-- page scripts  -->
-<script src="tasks.page.js"></script>
-<script src="affirmations.pages.js"></script>
+    <!-- page scripts  -->
+    <script src="tasks.page.js"></script>
+    <script src="affirmations.pages.js"></script>
 
-<!-- startup command and scripts -->
-<script type="text/javascript">
-    changePage('Tasks');
-</script>
+    <!-- startup command and scripts -->
+    <script type="text/javascript">
+        changePage('Tasks');
+    </script>
+    </body>
 </html>

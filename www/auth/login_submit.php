@@ -58,8 +58,8 @@
             if ($t->setAccess("app_access")) {
                 $t = $t->getToken();
                 mail($email, "Login Notification",  "Somebody logged into your account with your password. \r\nIf that wasn't you, consider changing your password here: https://" . $_SERVER["HTTP_HOST"] . "/auth/recoverPassword.html\r\n\r\nThank you for using our services.\r\nThe Day-to-Day Team", "From: Day-to-Day <noreply@jimmybear217.com>");
-                setcookie("token", base64_encode($username . ":" . $t), time()+(60*60*24), "/", $_SERVER["HTTP_HOST"], true, false);
-                setcookie("username", $username, time()+(60*60*24), "/", $_SERVER["HTTP_HOST"], true, false);
+                setcookie("token", base64_encode($username . ":" . $t), time()+(60*60*24*30), "/", $_SERVER["HTTP_HOST"], true, false);
+                setcookie("username", $username, time()+(60*60*24*30), "/", $_SERVER["HTTP_HOST"], true, false);
                 header("Location: /app", true, 307);
                 finalOutput("You are successfully logged in, redirecting you to <a href='/app'>the app</a>");
             } else {

@@ -1,11 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.9.5
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3306
--- Generation Time: Dec 25, 2020 at 04:32 AM
--- Server version: 10.4.14-MariaDB-cll-lve
--- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,14 +22,47 @@ CREATE TABLE `users` (
   `created` int(10) NOT NULL COMMENT 'unix epoch time'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Indexes for dumped tables
---
+
+CREATE TABLE `goals` (
+  `goal_id` bigint(20) NOT NULL,
+  `username` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_added` date NOT NULL DEFAULT current_timestamp(),
+  `status` enum('exists','current','deleted') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'exists'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 
 --
--- Indexes for table `users`
+-- Indexes for tables
 --
+
+-- Table Users
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `email` (`email`);
+
+
+-- Table Goals
+
+ALTER TABLE `goals`
+  ADD PRIMARY KEY (`goal_id`),
+  ADD KEY `username` (`username`);
+
+ALTER TABLE `goals`
+  MODIFY `goal_id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `goals`
+  ADD CONSTRAINT `username` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+--
+-- Content of tables
+--
+
+
+
+
+
 COMMIT;

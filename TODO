@@ -4,7 +4,7 @@
 ## Step 3 - Content
 [-] Establish weekly goal page as homepage
     [_] create placeholders
-    [_] create table
+    [X] create database table
     [_] create form to edit table
 [_] Add daily checking page
     [_] submit

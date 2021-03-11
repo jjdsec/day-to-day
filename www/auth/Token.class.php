@@ -173,7 +173,7 @@ class Token {
             error_log("unable to verify existance of token: " . $e->getMessage());
         }
         // insert token with "none" access
-        $expiration = intval(time()+(60*60*24));
+        $expiration = intval(time()+(60*60*24*30));
         try {
             $result = $stmI->execute(array(
                 $token,

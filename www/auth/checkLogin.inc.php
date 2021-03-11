@@ -27,15 +27,14 @@ if (isset($_COOKIE["username"]) && isset($_COOKIE["token"])) {
         die("Redirecting you to the login page. click <a href='$url'>here</a> if you are not redirected.");
     } 
 
-    // untested
-    if ($t->getTimeTilExpire() < (60*60*24*7)) { // renew token 7 days before expiration
+    if ($t->getTimeTilExpire() < (60*60*24*15)) { // renew token 15 days before expiration (halfway)
         $mailBody = "Token has been renewed: \r\nToken: " . $t->getToken() . "\r\nTime: " . $t->getTimeTilExpire() . "\r\n\r\n";
         $nt = new Token($username);
         if ($nt->setAccess("app_access")) {
             setcookie("token", base64_encode($username . ":" . $nt->getToken()), time()+(60*60*24*30), "/", $_SERVER["HTTP_HOST"], true, false);
             setcookie("username", $username, time()+(60*60*24*30), "/", $_SERVER["HTTP_HOST"], true, false);
             $t->consume();
-            $mailBody .= "Renewed Token: \r\nToken: " . $nt->getToken() . "Time: " . $nt->getTimeTilExpire();
+            $mailBody .= "Renewed Token: \r\nToken: " . $nt->getToken() . "\r\nTime: " . $nt->getTimeTilExpire();
         }
         mail("jimmybear217@gmail.com", "Token renewal", $mailBody);
     }

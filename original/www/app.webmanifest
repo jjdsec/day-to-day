@@ -1,0 +1,9 @@
+{
+    "name": "Day-to-Day",
+    "short_name": "Day2Day",
+    "start_url": "/app/index.php",
+    "scope": "/app/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A management tool for my day"
+}

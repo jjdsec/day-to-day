@@ -4,7 +4,7 @@ services:
   web:
     image: nginx:latest
     ports:
-      - '8080:80'
+      - '80:80'
     volumes:
       - ./public:/var/www/html
       - ./config/nginx-default.conf:/etc/nginx/conf.d/default.conf
@@ -14,6 +14,11 @@ services:
     image: php:8-fpm
     volumes:
       - ./public:/var/www/html
+    environment:
+      - DB_HOST=localhost
+      - DB_DATABASE=day2day
+      - DB_USERNAME=sqluser     # Change this to something more secure before running in production
+      - DB_PASSWORD=sqlpass     # Change this to something more secure before running in production
   database:
     image: mysql:latest
     ports:
